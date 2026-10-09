@@ -88,7 +88,7 @@ body{background-color:#090909;background-image:linear-gradient(#050505dc,#050505
 /* X first, then the two partner logos */
 .intro-overlay{display:none}
 html.intro-playing{overflow:hidden}
-.intro-playing .intro-overlay{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:#050505;overflow:hidden;animation:intro-out .65s ease-in-out 2.5s both}
+.intro-playing .intro-overlay{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:#050505;overflow:hidden;animation:intro-out .65s ease-in-out 4.1s both}
 .intro-overlay:before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,#ff690012,transparent 60%)}
 .intro-scene{position:relative;width:min(820px,86vw);aspect-ratio:4127/1177}
 .intro-scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none}
@@ -131,11 +131,13 @@ html.intro-playing{overflow:hidden}
 @media(max-width:580px){.contact-content{flex-direction:column;align-items:flex-start;gap:24px}.contact-links{align-items:flex-start;gap:20px}.contact-phone{font-size:24px}.social-icons a{width:44px;height:44px}.contact-section{padding-top:36px;padding-bottom:36px}}
 /* The photo and animated marks share one coordinate system at every screen size. */
 .intro-artboard{position:absolute;left:50%;top:50%;width:max(100vw,177.6087vh);aspect-ratio:1634/920;transform:translate(-50%,-50%)}
-.intro-background{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;max-width:none}
+.intro-background{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;max-width:none;animation:intro-runner-reveal 1.7s cubic-bezier(.22,1,.36,1) 1.65s both}
 .intro-artboard .intro-scene{position:absolute;left:42.96%;top:34.35%;width:13.77%;aspect-ratio:4127/1177;transform:rotate(1deg);transform-origin:center}
 .intro-overlay:before{display:none}
 .intro-x{filter:drop-shadow(0 0 8px #ff690030)}
 .intro-artboard .intro-caption{display:none}
+
+@keyframes intro-runner-reveal{from{opacity:0;filter:brightness(0)}to{opacity:1;filter:brightness(1)}}
 
 </style>
   <script>
@@ -144,7 +146,7 @@ html.intro-playing{overflow:hidden}
       window.introSafetyTimer = setTimeout(() => {
         document.documentElement.classList.remove('intro-playing');
         document.querySelectorAll('.header, main, footer').forEach(el => { el.inert = false; });
-      }, 4500);
+      }, 6000);
     }
   </script>
   
@@ -357,7 +359,7 @@ if (document.documentElement.classList.contains('intro-playing')) {
   function handleIntroKey(event) {if(event.key === 'Escape'){event.preventDefault();finishIntro();} if(event.key === 'Tab'){event.preventDefault();introSkip.focus({preventScroll:true});}}
   document.addEventListener('keydown', handleIntroKey);
   introSkip.addEventListener('click', finishIntro);
-  introTimer = setTimeout(finishIntro, 3200);
+  introTimer = setTimeout(finishIntro, 4800);
 } else {
   introOverlay.remove();
 }
